@@ -15,7 +15,7 @@ snippet m_thread
 		with ThreadPoolExecutor(max_workers=pool_size_) as pool:
 			tasks = {pool.submit(func, data): data for data in datas}
 			complete_task = 0
-			for task in tasks:
+			for task in as_completed(tasks):
 				complete_task += 1
 				try:
 					task.result()
