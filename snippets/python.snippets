@@ -5,4 +5,21 @@ snippet ilog
 
 	logging.basicConfig(format="%(threadName)s %(asctime)s %(levelname)s line %(lineno)s : %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
 
-	LOGGER = logging.getLogger(${0:__name__})
+	logger = logging.getLogger(${0:__name__})
+
+# MutilThread
+snippet m_thread
+	from concurrent.futures import ThreadPoolExecutor, as_completed
+
+	def run(datas, func, pool_size_):
+		with ThreadPoolExecutor(max_workers=pool_size_) as pool:
+			tasks = {pool.submit(func, data): data for data in datas}
+			complete_task = 0
+			for task in tasks:
+				complete_task += 1
+				try:
+					task.result()
+					logger.info("** progress -------- {:^9} - {:^8.2%} --------".format("{}/{}".format(complete_task, len(tasks)), complete_task/len(datas)))
+				except Exception as e:
+					logger.exception(e)
+	    
