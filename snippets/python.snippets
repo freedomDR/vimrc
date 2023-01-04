@@ -7,6 +7,15 @@ snippet ilog
 
 	logger = logging.getLogger(${0:__name__})
 
+# rich log 
+snippet rlog
+	import logging
+	from rich.logging import RichHandler
+
+	logging.basicConfig(format="%(threadName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO, handlers=[RichHandler(omit_repeated_times=False)])
+
+	logger = logging.getLogger(__name__)
+
 # MutilThread
 snippet m_thread
 	from concurrent.futures import ThreadPoolExecutor, as_completed
