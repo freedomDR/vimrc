@@ -3,7 +3,7 @@
 snippet ilog
 	import logging
 
-	logging.basicConfig(format="%(threadName)s %(asctime)s %(levelname)s line %(lineno)s : %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
+	logging.basicConfig(format="%(process)d %(processName)s %(thread)d %(threadName)s %(asctime)s %(levelname)s line %(lineno)s : %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
 
 	logger = logging.getLogger(${0:__name__})
 
