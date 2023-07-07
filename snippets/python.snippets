@@ -31,4 +31,20 @@ snippet m_thread
 					logger.info("** progress -------- {:^9} - {:^8.2%} --------".format("{}/{}".format(complete_task, len(tasks)), complete_task/len(datas)))
 				except Exception as e:
 					logger.exception(e)
+
+# MutilProcess
+snippet m_process
+	from concurrent.futures import ProcessPoolExecutor, as_completed
+
+	def run(datas, func, pool_size_):
+		with ProcessPoolExecutor(max_workers=pool_size_) as pool:
+			tasks = {pool.submit(func, data): data for data in datas}
+			complete_task = 0
+			for task in as_completed(tasks):
+				complete_task += 1
+				try:
+					task.result()
+					logger.info("** progress -------- {:^9} - {:^8.2%} --------".format("{}/{}".format(complete_task, len(tasks)), complete_task/len(datas)))
+				except Exception as e:
+					logger.exception(e)
 	    
