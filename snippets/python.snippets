@@ -2,8 +2,9 @@
 # glog = init log
 snippet ilog
 	import logging
+	import sys
 
-	logging.basicConfig(format="%(process)d %(processName)s %(thread)d %(threadName)s %(asctime)s %(levelname)s line %(lineno)s : %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
+	logging.basicConfig(format="%(process)d %(processName)s %(thread)d %(threadName)s %(asctime)s %(levelname)s line %(lineno)s : %(message)s", datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO, handlers=[logging.FileHandler(f"{sys.argv[0].split('.')[0]}.log"), logging.StreamHandler()])
 
 	logger = logging.getLogger(${0:__name__})
 
