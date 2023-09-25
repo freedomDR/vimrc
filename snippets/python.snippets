@@ -21,7 +21,7 @@ snippet rlog
 snippet m_thread
 	from concurrent.futures import ThreadPoolExecutor, as_completed
 
-	def run(datas, func, pool_size_):
+	def run_threads(datas, func, pool_size_):
 		with ThreadPoolExecutor(max_workers=pool_size_) as pool:
 			tasks = {pool.submit(func, data): data for data in datas}
 			complete_task = 0
@@ -37,7 +37,7 @@ snippet m_thread
 snippet m_process
 	from concurrent.futures import ProcessPoolExecutor, as_completed
 
-	def run(datas, func, pool_size_):
+	def run_processes(datas, func, pool_size_):
 		with ProcessPoolExecutor(max_workers=pool_size_) as pool:
 			tasks = {pool.submit(func, data): data for data in datas}
 			complete_task = 0
