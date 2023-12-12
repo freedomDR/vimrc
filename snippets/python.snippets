@@ -77,3 +77,20 @@ snippet DB
 		def close(self):
 			self.conn.commit()
 			self.conn.close()
+# cost_func_time
+snippet cft
+	import functools
+	import time
+
+	def calcCostTime(func):
+		@functools.wraps(func)
+		def wrapper(*args, **kv):
+			logger.info("*"*20 + "  function start run  " + "*"*20)
+			start_time = time.time()
+			ret = func(*args, **kv)
+			end_time = time.time()
+			logger.info("function end run. cost time is {}s".format(end_time-start_time))
+			logger.info("*"*20 + "*********************" + "*"*20)
+			return ret
+		return wrapper
+
